@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AndroidORMComparison</string>
+    <string name="GreenDao">GreenDao</string>
+    <string name="Room">Room</string>
+    <string name="DBFlow">DBFlow</string>
+    <string name="ORMLite">ORMLite</string>
+    <string name="JDBC">JDBC</string>
 </resources>
