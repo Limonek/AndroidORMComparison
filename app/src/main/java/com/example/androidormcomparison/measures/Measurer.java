@@ -1,6 +1,6 @@
-package com.example.androidormcomparison;
+package com.example.androidormcomparison.measures;
 
-public interface Measure {
+public interface Measurer {
     void init();
     void run(int numberOfEntities);
     void store();

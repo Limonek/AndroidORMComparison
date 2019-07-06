@@ -1,10 +1,8 @@
 package com.example.androidormcomparison.Room;
 
-import com.example.androidormcomparison.Measure;
+import com.example.androidormcomparison.measures.Measurer;
 
-import java.io.InterruptedIOException;
-
-public class RoomMeasure implements Measure {
+public class RoomMeasurer implements Measurer {
 
     @Override
     public void init() {

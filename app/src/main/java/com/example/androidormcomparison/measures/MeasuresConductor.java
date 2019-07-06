@@ -1,4 +1,6 @@
-package com.example.androidormcomparison;
+package com.example.androidormcomparison.measures;
+
+import com.example.androidormcomparison.measures.MeasureOperator;
 
 import java.util.Arrays;
 import java.util.List;

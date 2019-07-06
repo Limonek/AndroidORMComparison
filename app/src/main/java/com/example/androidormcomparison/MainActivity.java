@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidormcomparison.GreenDao.GreenDaoMesaure;
-import com.example.androidormcomparison.Room.RoomMeasure;
+import com.example.androidormcomparison.GreenDao.GreenDaoMesaurer;
+import com.example.androidormcomparison.Room.RoomMeasurer;
+import com.example.androidormcomparison.measures.MeasureOperator;
+import com.example.androidormcomparison.measures.MeasuresConductor;
 
 import butterknife.OnClick;
 
@@ -19,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.GreenDaoMeasureButton)
     public void GreenDaoMeasureButtonOnClick() {
-        new MeasuresConductor(new MeasureOperator(new GreenDaoMesaure())).conductMeasures();
+        new MeasuresConductor(new MeasureOperator(new GreenDaoMesaurer(getApplicationContext()))).conductMeasures();
     }
 
     @OnClick(R.id.RoomMeasureButton)
     public void RoomMeasureButtonOnClick() {
-        new MeasuresConductor(new MeasureOperator(new RoomMeasure())).conductMeasures();
+        new MeasuresConductor(new MeasureOperator(new RoomMeasurer())).conductMeasures();
     }
 
     @OnClick(R.id.DBFlowMeasureButton)
