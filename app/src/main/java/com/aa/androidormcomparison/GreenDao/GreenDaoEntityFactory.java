@@ -1,4 +1,4 @@
-package com.example.androidormcomparison.GreenDao;
+package com.aa.androidormcomparison.GreenDao;
 
 public class GreenDaoEntityFactory {
     public static GreenDaoEntity createMaxGreenDaoEntity(Long id) {

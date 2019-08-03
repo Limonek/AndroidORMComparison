@@ -1,14 +1,11 @@
-package com.example.androidormcomparison.GreenDao;
+package com.aa.androidormcomparison.Room;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-
-import java.util.Date;
-import org.greenrobot.greendao.annotation.Generated;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
-public class GreenDaoEntity {
-    @Id
+public class RoomEntity {
+    @PrimaryKey
     private Long id;
     private Boolean nullBoolean;
     private Byte nullByte;
@@ -24,8 +21,8 @@ public class GreenDaoEntity {
     private long notNullLong;
     private float notNullFloat;
     private double notNullDouble;
-    @Generated(hash = 873836493)
-    public GreenDaoEntity(Long id, Boolean nullBoolean, Byte nullByte,
+
+    public RoomEntity(Long id, Boolean nullBoolean, Byte nullByte,
                           Short nullShort, Integer nullInt, Long nullLong, Float nullFloat,
                           Double nullDouble, boolean notNullBoolean, byte notNullByte,
                           short notNullShort, int notNullInt, long notNullLong,
@@ -46,8 +43,7 @@ public class GreenDaoEntity {
         this.notNullFloat = notNullFloat;
         this.notNullDouble = notNullDouble;
     }
-    @Generated(hash = 457785240)
-    public GreenDaoEntity() {
+    public RoomEntity() {
     }
     public Long getId() {
         return this.id;
@@ -139,4 +135,4 @@ public class GreenDaoEntity {
     public void setNotNullDouble(double notNullDouble) {
         this.notNullDouble = notNullDouble;
     }
-    }
+}

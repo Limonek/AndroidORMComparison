@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/lenovo-lenovo_k10a40-62210930HG106BH04LH/data/data/com.example.androidormcomparison/databases/MeasurementDatabase2.db" charset="windows-1252" />
+  </component>
 </project>

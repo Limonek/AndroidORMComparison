@@ -1,14 +1,14 @@
-package com.example.androidormcomparison;
+package com.aa.androidormcomparison;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidormcomparison.GreenDao.GreenDaoMesaurer;
-import com.example.androidormcomparison.Room.RoomMeasurer;
-import com.example.androidormcomparison.measures.MeasureOperator;
-import com.example.androidormcomparison.measures.MeasuresConductor;
+import com.aa.androidormcomparison.GreenDao.GreenDaoMeasurer;
+import com.aa.androidormcomparison.Room.RoomMeasurer;
+import com.aa.androidormcomparison.measures.MeasuresConductor;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,16 +17,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.GreenDaoMeasureButton)
     public void GreenDaoMeasureButtonOnClick() {
-        new MeasuresConductor(new MeasureOperator(new GreenDaoMesaurer(getApplicationContext()))).conductMeasures();
+        new MeasuresConductor(new GreenDaoMeasurer(this)).conductMeasures();
     }
+
+    int GreenDaoMeasureButtonOnClick(int i){return 1;}
 
     @OnClick(R.id.RoomMeasureButton)
     public void RoomMeasureButtonOnClick() {
-        new MeasuresConductor(new MeasureOperator(new RoomMeasurer())).conductMeasures();
+        new MeasuresConductor(new RoomMeasurer()).conductMeasures();
     }
 
     @OnClick(R.id.DBFlowMeasureButton)

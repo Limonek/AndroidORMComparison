@@ -1,4 +1,4 @@
-package com.example.androidormcomparison;
+package com.aa.androidormcomparison;
 
 import org.junit.Test;
 
