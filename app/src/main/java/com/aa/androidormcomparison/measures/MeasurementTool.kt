@@ -24,9 +24,9 @@ class MeasurementTool {
         timeMillis = SystemClock.elapsedRealtime()
     }
 
-    fun stop(orm: ORM, testedAction: TestedAction, action: TestedAction, numberOfEntities: Int) {
+    fun stop(orm: ORM, testedAction: TestedAction, actionType: ActionType, numberOfEntities: Int) {
         val timeMillisStop = SystemClock.elapsedRealtime()
-        measurements.add(Measurement(timeMillisStop - timeMillis, testedAction.name, action.name, orm.name, numberOfEntities, Date()))
+        measurements.add(Measurement(timeMillisStop - timeMillis, testedAction.name, actionType.name, orm.name, numberOfEntities, Date()))
     }
 
     fun storeResultsInDatabase(context: Context) {

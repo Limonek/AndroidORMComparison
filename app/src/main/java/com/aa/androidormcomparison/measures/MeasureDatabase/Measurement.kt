@@ -6,13 +6,13 @@ import java.util.*
 
 @Entity
 data class Measurement(
-    private var duration: Long,
-    private var testedActionName: String,
-    private var actionTypeName: String,
-    private var ormName: String,
-    private var numberOfRecords:Int,
-    private var date: Date
+    var duration: Long,
+    var testedActionName: String,
+    var actionTypeName: String,
+    var ormName: String,
+    var numberOfRecords:Int,
+    var date: Date
 ){
-    @PrimaryKey(autoGenerate = true) private val id: Int = 0
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
 

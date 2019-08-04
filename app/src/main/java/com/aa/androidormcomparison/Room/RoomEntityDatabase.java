@@ -9,8 +9,8 @@ import com.aa.androidormcomparison.measures.MeasureDatabase.Measurement;
 import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementDao;
 
 
-@Database(version = 1, entities = {Measurement.class}, exportSchema = false)
+@Database(version = 1, entities = {RoomEntity.class}, exportSchema = false)
 @TypeConverters(DatesConverter.class)
 public abstract class RoomEntityDatabase extends RoomDatabase {
-    public abstract MeasurementDao measurementDao();
+    public abstract RoomEntityDao roomEntityDao();
 }

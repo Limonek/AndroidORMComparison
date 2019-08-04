@@ -3,13 +3,17 @@ package com.aa.androidormcomparison.Room;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.room.Room;
+
 import com.aa.androidormcomparison.measures.ActionType;
-import com.aa.androidormcomparison.measures.MeasurementToolJava;
+import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 //measurer conducting and measuring actions
 public class RoomMeasurer implements Measurer {
@@ -18,7 +22,7 @@ public class RoomMeasurer implements Measurer {
 
     private Context context;
 
-    private MeasurementToolJava measurementTool = new MeasurementToolJava();
+    private MeasurementTool measurementTool = new MeasurementTool();
     private List<RoomEntity> roomMinEntities;
     private List<RoomEntity> roomMaxEntities;
     private int numberOfEntities;
@@ -29,24 +33,30 @@ public class RoomMeasurer implements Measurer {
 
     @Override
     public void init() {
-//        RoomEntityDatabase roomEntityDatabase = Room.databaseBuilder(context, RoomEntityDatabase.class, "RoomEntityDatabase.db").build();
-//        MeasurementDao measurementDao = measurementsDatabase.measurementDao();
-//        List measurementsReference = measurements;
-//        measurements = new LinkedList<>();
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//                    measurementDao.insertAll(measurementsReference);
-//                }
-//        );
-////        measurements = new LinkedList<>();
-//        measurementsDatabase.close();
+        RoomEntityDatabase roomEntityDatabase = Room.databaseBuilder(context, RoomEntityDatabase.class, "RoomEntityDatabase.db").build();
+        roomEntityDao = roomEntityDatabase.roomEntityDao();
+        if (roomMaxEntities == null || numberOfEntities != roomMaxEntities.size()) {
+            roomMaxEntities = new ArrayList<>();
+            for (int i = 0; i < numberOfEntities; i++) {
+                roomMaxEntities.add(RoomEntityFactory.createMaxGreenDaoEntity((long) i));
+            }
+        }
+        if (roomMinEntities == null || numberOfEntities != roomMinEntities.size()) {
+            roomMinEntities = new ArrayList<>();
+            for (int i = 0; i < numberOfEntities; i++) {
+                roomMaxEntities.add(RoomEntityFactory.createMinGreenDaoEntity((long) i));
+            }
+        }
     }
 
     @Override
     public void run() {
-        measureCreate();
-        measureUpdate();
-        measureRead();
-        measureDelete();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            measureCreate();
+            measureUpdate();
+            measureRead();
+            measureDelete();
+        });
     }
 
     private void measureCreate() {
@@ -72,7 +82,6 @@ public class RoomMeasurer implements Measurer {
 
     private void measureRead() {
         measurementTool.start();
-        //Query query = roomEntityDao.queryBuilder().where(GreenDaoEntityDao.Properties.Id.eq(0)).build();
         for (int i = 0; i < numberOfEntities; i++) {
             RoomEntity roomEntity = roomEntityDao.read(i);
             if (roomEntity != null) {
@@ -98,7 +107,7 @@ public class RoomMeasurer implements Measurer {
 
     @Override
     public void store() {
-
+        measurementTool.storeResultsInDatabase(context);
     }
 
     @Override

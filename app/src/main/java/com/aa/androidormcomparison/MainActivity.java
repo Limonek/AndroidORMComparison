@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.RoomMeasureButton)
     public void RoomMeasureButtonOnClick() {
-        new MeasuresConductor(new RoomMeasurer()).conductMeasures();
+        new MeasuresConductor(new RoomMeasurer(this)).conductMeasures();
     }
 
     @OnClick(R.id.DBFlowMeasureButton)

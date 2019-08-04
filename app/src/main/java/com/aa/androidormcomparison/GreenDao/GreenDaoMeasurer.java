@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.aa.androidormcomparison.measures.ActionType;
-import com.aa.androidormcomparison.measures.MeasurementToolJava;
+import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
@@ -14,6 +14,7 @@ import org.greenrobot.greendao.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 //measurer conducting and measuring actions
 public class GreenDaoMeasurer implements Measurer {
@@ -25,7 +26,7 @@ public class GreenDaoMeasurer implements Measurer {
     private DaoMaster daoMaster;
     private GreenDaoEntityDao greenDaoEntityDao;
 
-    private MeasurementToolJava measurementTool = new MeasurementToolJava();
+    private MeasurementTool measurementTool = new MeasurementTool();
     private List<GreenDaoEntity> greenDaoMinEntities;
     private List<GreenDaoEntity> greenDaoMaxEntities;
     private int numberOfEntities;
@@ -58,10 +59,12 @@ public class GreenDaoMeasurer implements Measurer {
 
     @Override
     public void run() {
-        measureCreate();
-        measureUpdate();
-        measureRead();
-        measureDelete();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            measureCreate();
+            measureUpdate();
+            measureRead();
+            measureDelete();
+        });
     }
 
     private void measureCreate() {
