@@ -3,23 +3,13 @@ package com.aa.androidormcomparison.Room;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.room.Room;
-
-import com.aa.androidormcomparison.GreenDao.GreenDaoEntity;
-import com.aa.androidormcomparison.GreenDao.GreenDaoEntityDao;
 import com.aa.androidormcomparison.measures.ActionType;
-import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementDao;
-import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementsDatabase;
-import com.aa.androidormcomparison.measures.MeasurementTool;
+import com.aa.androidormcomparison.measures.MeasurementToolJava;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
 
-import org.greenrobot.greendao.query.Query;
-
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 //measurer conducting and measuring actions
 public class RoomMeasurer implements Measurer {
@@ -28,7 +18,7 @@ public class RoomMeasurer implements Measurer {
 
     private Context context;
 
-    private MeasurementTool measurementTool = new MeasurementTool();
+    private MeasurementToolJava measurementTool = new MeasurementToolJava();
     private List<RoomEntity> roomMinEntities;
     private List<RoomEntity> roomMaxEntities;
     private int numberOfEntities;

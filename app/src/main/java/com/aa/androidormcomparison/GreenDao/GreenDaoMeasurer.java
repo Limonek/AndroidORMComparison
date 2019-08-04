@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.aa.androidormcomparison.measures.ActionType;
-import com.aa.androidormcomparison.measures.MeasurementTool;
+import com.aa.androidormcomparison.measures.MeasurementToolJava;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
@@ -25,7 +25,7 @@ public class GreenDaoMeasurer implements Measurer {
     private DaoMaster daoMaster;
     private GreenDaoEntityDao greenDaoEntityDao;
 
-    private MeasurementTool measurementTool = new MeasurementTool();
+    private MeasurementToolJava measurementTool = new MeasurementToolJava();
     private List<GreenDaoEntity> greenDaoMinEntities;
     private List<GreenDaoEntity> greenDaoMaxEntities;
     private int numberOfEntities;

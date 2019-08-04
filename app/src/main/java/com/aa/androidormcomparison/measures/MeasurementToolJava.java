@@ -14,11 +14,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class MeasurementTool {
-    public List<Measurement> measurements = new LinkedList<>();
-    long timeMillis;
+public class MeasurementToolJava {
+    private List<Measurement> measurements = new LinkedList<>();
+    private long timeMillis;
 
-    public void startGarbageCollector() {
+    private void startGarbageCollector() {
         for (int i = 0; i < 10; i++) {
             System.gc();
             try {
@@ -30,7 +30,6 @@ public class MeasurementTool {
     }
 
     public void start() {
-//        measurements.clear();
         startGarbageCollector();
         timeMillis = SystemClock.elapsedRealtime();
     }
