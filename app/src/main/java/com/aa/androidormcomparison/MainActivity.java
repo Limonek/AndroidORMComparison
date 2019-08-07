@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aa.androidormcomparison.DBFlow.DBFlowMeasurer;
 import com.aa.androidormcomparison.GreenDao.GreenDaoMeasurer;
 import com.aa.androidormcomparison.Room.RoomMeasurer;
 import com.aa.androidormcomparison.measures.MeasuresConductor;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.DBFlowMeasureButton)
     public void DBFlowMeasureButtonOnClick() {
-
+        new MeasuresConductor(new DBFlowMeasurer(this)).conductMeasures();
     }
 
     @OnClick(R.id.ORMLiteMeasureButton)
