@@ -1,7 +1,6 @@
 package com.aa.androidormcomparison.Room;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.room.Room;
 
@@ -13,11 +12,11 @@ import com.aa.androidormcomparison.measures.TestedAction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 //measurer conducting and measuring actions
 public class RoomMeasurer implements Measurer {
 
+    RoomEntityDatabase roomEntityDatabase;
     RoomEntityDao roomEntityDao;
 
     private Context context;
@@ -33,7 +32,7 @@ public class RoomMeasurer implements Measurer {
 
     @Override
     public void init() {
-        RoomEntityDatabase roomEntityDatabase = Room.databaseBuilder(context, RoomEntityDatabase.class, "RoomEntityDatabase.db").build();
+        roomEntityDatabase = Room.databaseBuilder(context, RoomEntityDatabase.class, "RoomEntityDatabase.db").build();
         roomEntityDao = roomEntityDatabase.roomEntityDao();
         if (roomMaxEntities == null || numberOfEntities != roomMaxEntities.size()) {
             roomMaxEntities = new ArrayList<>();
@@ -51,12 +50,10 @@ public class RoomMeasurer implements Measurer {
 
     @Override
     public void run() {
-        Executors.newSingleThreadExecutor().execute(() -> {
-            measureCreate();
-            measureUpdate();
-            measureRead();
-            measureDelete();
-        });
+        measureCreate();
+        measureUpdate();
+        measureRead();
+        measureDelete();
     }
 
     private void measureCreate() {
@@ -114,13 +111,9 @@ public class RoomMeasurer implements Measurer {
     public void conductWholeMeasureProcess(int numberOfEntities) {
         this.numberOfEntities = numberOfEntities;
         init();
-        Toast.makeText(context, "INIT INIT!!!!", Toast.LENGTH_LONG).show();
         run();
-        Toast.makeText(context, "RUN RUN!!!!", Toast.LENGTH_LONG).show();
         store();
-        Toast.makeText(context, "STORE STORE!!!!", Toast.LENGTH_LONG).show();
         clean();
-        Toast.makeText(context, "CLEAN CLEAN!!!!", Toast.LENGTH_LONG).show();
     }
 
     @Override

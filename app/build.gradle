@@ -87,5 +87,8 @@ dependencies {
     // adds generated content provider annotations + support.
     implementation "com.github.agrosner.dbflow:contentprovider:${dbflow_version}"
 
+    //ORMLite
+
+    implementation 'com.j256.ormlite:ormlite-android:5.0'
 
 }

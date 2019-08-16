@@ -14,7 +14,6 @@ import org.greenrobot.greendao.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 //measurer conducting and measuring actions
 public class GreenDaoMeasurer implements Measurer {
@@ -59,12 +58,10 @@ public class GreenDaoMeasurer implements Measurer {
 
     @Override
     public void run() {
-        Executors.newSingleThreadExecutor().execute(() -> {
-            measureCreate();
-            measureUpdate();
-            measureRead();
-            measureDelete();
-        });
+        measureCreate();
+        measureUpdate();
+        measureRead();
+        measureDelete();
     }
 
     private void measureCreate() {
@@ -124,13 +121,9 @@ public class GreenDaoMeasurer implements Measurer {
     public void conductWholeMeasureProcess(int numberOfEntities) {
         this.numberOfEntities = numberOfEntities;
         init();
-        Toast.makeText(context, "INIT INIT!!!!", Toast.LENGTH_LONG).show();
         run();
-        Toast.makeText(context, "RUN RUN!!!!", Toast.LENGTH_LONG).show();
         store();
-        Toast.makeText(context, "STORE STORE!!!!", Toast.LENGTH_LONG).show();
         clean();
-        Toast.makeText(context, "CLEAN CLEAN!!!!", Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aa.androidormcomparison.DBFlow.DBFlowMeasurer;
 import com.aa.androidormcomparison.GreenDao.GreenDaoMeasurer;
+import com.aa.androidormcomparison.ORMLite.ORMLiteMeasurer;
 import com.aa.androidormcomparison.Room.RoomMeasurer;
 import com.aa.androidormcomparison.measures.MeasuresConductor;
 
@@ -26,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         new MeasuresConductor(new GreenDaoMeasurer(this)).conductMeasures();
     }
 
-    int GreenDaoMeasureButtonOnClick(int i){return 1;}
-
     @OnClick(R.id.RoomMeasureButton)
     public void RoomMeasureButtonOnClick() {
         new MeasuresConductor(new RoomMeasurer(this)).conductMeasures();
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.ORMLiteMeasureButton)
     public void ORMLiteMeasureButtonOnClick() {
-
+        new MeasuresConductor(new ORMLiteMeasurer(this)).conductMeasures();
     }
 
     @OnClick(R.id.JDBCMeasureButton)

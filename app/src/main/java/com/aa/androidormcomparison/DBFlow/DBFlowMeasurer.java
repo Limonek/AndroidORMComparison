@@ -1,7 +1,6 @@
 package com.aa.androidormcomparison.DBFlow;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
@@ -9,7 +8,6 @@ import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
 import com.dbflow5.adapter.ModelAdapter;
-import com.dbflow5.config.DBFlowDatabase;
 import com.dbflow5.config.FlowManager;
 
 import java.util.ArrayList;
@@ -56,7 +54,6 @@ public class DBFlowMeasurer implements Measurer {
 
     @Override
     public void run() {
-
         measureCreate();
         measureUpdate();
         measureRead();
@@ -120,13 +117,9 @@ public class DBFlowMeasurer implements Measurer {
         this.numberOfEntities = numberOfEntities;
         Executors.newSingleThreadExecutor().execute(() -> {
             init();
-//            Toast.makeText(context, "INIT INIT!!!!", Toast.LENGTH_LONG).show();
             run();
-//            Toast.makeText(context, "RUN RUN!!!!", Toast.LENGTH_LONG).show();
             store();
-//            Toast.makeText(context, "STORE STORE!!!!", Toast.LENGTH_LONG).show();
             clean();
-//            Toast.makeText(context, "CLEAN CLEAN!!!!", Toast.LENGTH_LONG).show();
         });
     }
 
