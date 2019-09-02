@@ -43,7 +43,7 @@ public class RoomMeasurer implements Measurer {
         if (roomMinEntities == null || numberOfEntities != roomMinEntities.size()) {
             roomMinEntities = new ArrayList<>();
             for (int i = 0; i < numberOfEntities; i++) {
-                roomMaxEntities.add(RoomEntityFactory.createMinGreenDaoEntity((long) i));
+                roomMinEntities.add(RoomEntityFactory.createMinGreenDaoEntity((long) i));
             }
         }
     }
@@ -118,7 +118,7 @@ public class RoomMeasurer implements Measurer {
 
     @Override
     public void clean() {
-//        helper.close();
+        roomEntityDao.deleteAll();
     }
 
     public void setNumberOfEntities(int numberOfEntities) {

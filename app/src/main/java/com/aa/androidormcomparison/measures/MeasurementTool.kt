@@ -3,6 +3,7 @@ package com.aa.androidormcomparison.measures
 import android.content.Context
 import android.os.SystemClock
 import androidx.room.Room
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.aa.androidormcomparison.measures.MeasureDatabase.Measurement
 import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementsDatabase
 import java.util.*

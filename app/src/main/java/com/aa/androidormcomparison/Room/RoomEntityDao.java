@@ -16,4 +16,6 @@ public interface RoomEntityDao {
     void delete(RoomEntity roomEntity);
     @Query("SELECT * FROM RoomEntity WHERE ID = :id")
     RoomEntity read(int id);
+    @Query("DELETE FROM RoomEntity")
+    void deleteAll();
 }

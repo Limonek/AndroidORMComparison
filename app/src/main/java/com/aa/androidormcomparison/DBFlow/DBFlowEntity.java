@@ -5,7 +5,7 @@ import com.dbflow5.annotation.Column;
 import com.dbflow5.annotation.PrimaryKey;
 import com.dbflow5.annotation.Table;
 
-@Table(database = DBFlowDatabaseClass.class)
+@Table(database = DBFlowDatabaseClass.class, cachingEnabled = false)
 public class DBFlowEntity {
     @PrimaryKey
     private Long id;

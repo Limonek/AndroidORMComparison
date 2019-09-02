@@ -3,6 +3,8 @@ package com.aa.androidormcomparison.measures.MeasureDatabase
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 
 @Dao
 interface MeasurementDao {
@@ -11,5 +13,14 @@ interface MeasurementDao {
 
     @Query("SELECT * FROM MEASUREMENT")
     fun loadMeasurements(): List<Measurement>
+
+    @Query("DELETE FROM MEASUREMENT WHERE duration < :duration")
+    fun deleteTooShort(duration: Int)
+
+    @Query("delete from measurement where ormName = :ormName")
+    fun deleteOrmMeasurements(ormName: String)
+
+    @RawQuery
+    fun executeRawQuery(query: SupportSQLiteQuery): List<Measurement>
 
 }

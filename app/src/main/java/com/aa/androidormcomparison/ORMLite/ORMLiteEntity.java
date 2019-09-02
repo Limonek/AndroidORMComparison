@@ -3,7 +3,7 @@ package com.aa.androidormcomparison.ORMLite;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable
+@DatabaseTable(tableName = "ormliteentity")
 public class ORMLiteEntity {
     @DatabaseField(id = true)
     private Long id;

@@ -2,6 +2,7 @@ package com.aa.androidormcomparison.GreenDao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.aa.androidormcomparison.measures.ActionType;
@@ -51,7 +52,7 @@ public class GreenDaoMeasurer implements Measurer {
         if (greenDaoMinEntities == null || numberOfEntities != greenDaoMinEntities.size()) {
             greenDaoMinEntities = new ArrayList<>();
             for (int i = 0; i < numberOfEntities; i++) {
-                greenDaoMaxEntities.add(GreenDaoEntityFactory.createMinGreenDaoEntity((long) i));
+                greenDaoMinEntities.add(GreenDaoEntityFactory.createMinGreenDaoEntity((long) i));
             }
         }
     }
@@ -66,8 +67,10 @@ public class GreenDaoMeasurer implements Measurer {
 
     private void measureCreate() {
         measurementTool.start();
-        for (GreenDaoEntity greenDaoEntity : greenDaoMinEntities)
+        for (GreenDaoEntity greenDaoEntity : greenDaoMinEntities) {
             greenDaoEntityDao.insert(greenDaoEntity);
+//            Log.e("",)
+        }
         measurementTool.stop(ORM.GREENDAO, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
     }
 
@@ -128,6 +131,7 @@ public class GreenDaoMeasurer implements Measurer {
 
     @Override
     public void clean() {
+        daoSession.getGreenDaoEntityDao().deleteAll();
         helper.close();
     }
 

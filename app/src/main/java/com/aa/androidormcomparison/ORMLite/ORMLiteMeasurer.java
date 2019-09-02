@@ -1,7 +1,6 @@
 package com.aa.androidormcomparison.ORMLite;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class ORMLiteMeasurer implements Measurer {
 
-    private ORMLiteDatabaseHelper databaseHelper;
+    private MyORMLiteDatabaseHelper databaseHelper;
 
     private Dao<ORMLiteEntity, Integer> dao;
     private Context context;
@@ -33,7 +32,8 @@ public class ORMLiteMeasurer implements Measurer {
 
     @Override
     public void init() {
-        databaseHelper = OpenHelperManager.getHelper(context, ORMLiteDatabaseHelper.class);
+        databaseHelper = new MyORMLiteDatabaseHelper(context);// OpenHelperManager.getHelper(context, MyORMLiteDatabaseHelper.class);
+        databaseHelper.getWritableDatabase();
         try {
             dao = databaseHelper.getDao(ORMLiteEntity.class);
         } catch (SQLException e) {
@@ -57,8 +57,20 @@ public class ORMLiteMeasurer implements Measurer {
     public void run() {
         try {
             measureCreate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             measureUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             measureRead();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             measureDelete();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,7 +80,6 @@ public class ORMLiteMeasurer implements Measurer {
     private void measureCreate() throws SQLException {
         measurementTool.start();
         for (ORMLiteEntity oRMLiteEntity : oRMLiteMaxEntities) {
-            Log.e("ANY", oRMLiteEntity.getId().toString());
             dao.create(oRMLiteEntity);
         }
         measurementTool.stop(ORM.ORMLITE, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
@@ -94,7 +105,8 @@ public class ORMLiteMeasurer implements Measurer {
             ORMLiteEntity oRMLiteEntity = dao.queryBuilder()
                     .where()
                     .eq("id", i)
-                    .query().get(0);
+                    .query()
+                    .get(0);
             if (oRMLiteEntity != null) {
                 oRMLiteEntity.getId();
                 oRMLiteEntity.getNotNullBoolean();
@@ -132,6 +144,12 @@ public class ORMLiteMeasurer implements Measurer {
 
     @Override
     public void clean() {
+//        try {
+        databaseHelper.close();
+        context.deleteDatabase("/data/data/com.aa.androidormcomparison/databases/ORMLiteDatabase.db");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         OpenHelperManager.releaseHelper();
         databaseHelper = null;
     }

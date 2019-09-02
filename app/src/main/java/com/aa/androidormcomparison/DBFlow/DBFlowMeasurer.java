@@ -9,10 +9,10 @@ import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
 import com.dbflow5.adapter.ModelAdapter;
 import com.dbflow5.config.FlowManager;
+import com.dbflow5.query.SQLite;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import static com.dbflow5.config.FlowManager.getModelAdapter;
 
@@ -47,7 +47,7 @@ public class DBFlowMeasurer implements Measurer {
         if (dBFlowMinEntities == null || numberOfEntities != dBFlowMinEntities.size()) {
             dBFlowMinEntities = new ArrayList<>();
             for (int i = 0; i < numberOfEntities; i++) {
-                dBFlowMaxEntities.add(DBFlowEntityFactory.createMinDBFlowEntity((long) i));
+                dBFlowMinEntities.add(DBFlowEntityFactory.createMinDBFlowEntity((long) i));
             }
         }
     }
@@ -85,23 +85,25 @@ public class DBFlowMeasurer implements Measurer {
     private void measureRead() {
         measurementTool.start();
         for (int i = 0; i < numberOfEntities; i++) {
-            DBFlowEntity DBFlowEntity = null;
-            if (DBFlowEntity != null) {
-                DBFlowEntity.getId();
-                DBFlowEntity.isNotNullBoolean();
-                DBFlowEntity.getNotNullByte();
-                DBFlowEntity.getNotNullDouble();
-                DBFlowEntity.getNotNullFloat();
-                DBFlowEntity.getNotNullInt();
-                DBFlowEntity.getNotNullLong();
-                DBFlowEntity.getNotNullShort();
-                DBFlowEntity.isNullBoolean();
-                DBFlowEntity.getNullByte();
-                DBFlowEntity.getNullDouble();
-                DBFlowEntity.getNullFloat();
-                DBFlowEntity.getNullInt();
-                DBFlowEntity.getNullLong();
-                DBFlowEntity.getNullShort();
+            DBFlowEntity dBFlowEntity = SQLite.select().from(DBFlowEntity.class)
+                    .where(DBFlowEntity_Table.id.is((long) i))
+                    .queryList(dbFlowDatabase).get(0);
+            if (dBFlowEntity != null) {
+                dBFlowEntity.getId();
+                dBFlowEntity.isNotNullBoolean();
+                dBFlowEntity.getNotNullByte();
+                dBFlowEntity.getNotNullDouble();
+                dBFlowEntity.getNotNullFloat();
+                dBFlowEntity.getNotNullInt();
+                dBFlowEntity.getNotNullLong();
+                dBFlowEntity.getNotNullShort();
+                dBFlowEntity.isNullBoolean();
+                dBFlowEntity.getNullByte();
+                dBFlowEntity.getNullDouble();
+                dBFlowEntity.getNullFloat();
+                dBFlowEntity.getNullInt();
+                dBFlowEntity.getNullLong();
+                dBFlowEntity.getNullShort();
             }
         }
         measurementTool.stop(ORM.DBFLOW, TestedAction.READ, ActionType.SINGLE_ENTITY, numberOfEntities);
@@ -115,16 +117,16 @@ public class DBFlowMeasurer implements Measurer {
     @Override
     public void conductWholeMeasureProcess(int numberOfEntities) {
         this.numberOfEntities = numberOfEntities;
-        Executors.newSingleThreadExecutor().execute(() -> {
-            init();
-            run();
-            store();
-            clean();
-        });
+        init();
+        run();
+        store();
+        clean();
     }
 
     @Override
     public void clean() {
+        dbFlowDatabase.reset();
+
         dbFlowDatabase.close();
     }
 
