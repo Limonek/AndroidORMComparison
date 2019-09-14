@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
@@ -60,21 +59,21 @@ public class RoomMeasurer implements Measurer {
         measurementTool.start();
         for (RoomEntity roomEntity : roomMinEntities)
             roomEntityDao.insert(roomEntity);
-        measurementTool.stop(ORM.ROOM, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ROOM, TestedAction.CREATE, numberOfEntities);
     }
 
     private void measureUpdate() {
         measurementTool.start();
         for (RoomEntity roomEntity : roomMaxEntities)
             roomEntityDao.update(roomEntity);
-        measurementTool.stop(ORM.ROOM, TestedAction.UPDATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ROOM, TestedAction.UPDATE, numberOfEntities);
     }
 
     private void measureDelete() {
         measurementTool.start();
         for (RoomEntity roomEntity : roomMaxEntities)
             roomEntityDao.delete(roomEntity);
-        measurementTool.stop(ORM.ROOM, TestedAction.DELETE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ROOM, TestedAction.DELETE, numberOfEntities);
     }
 
     private void measureRead() {
@@ -99,7 +98,7 @@ public class RoomMeasurer implements Measurer {
                 roomEntity.getNullShort();
             }
         }
-        measurementTool.stop(ORM.ROOM, TestedAction.READ, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ROOM, TestedAction.READ, numberOfEntities);
     }
 
     @Override

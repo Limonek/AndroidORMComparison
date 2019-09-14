@@ -20,6 +20,12 @@ interface MeasurementDao {
     @Query("delete from measurement where ormName = :ormName")
     fun deleteOrmMeasurements(ormName: String)
 
+    @Query("delete from measurement where numberOfRecords < :minNumberOfRecords")
+    fun deleteOrmMeasurements(minNumberOfRecords: Int)
+
+    @Query("delete from measurement where numberOfRecords > :maxNumberOfRecords")
+    fun deleteBiggerOrmMeasurements(maxNumberOfRecords: Int)
+
     @RawQuery
     fun executeRawQuery(query: SupportSQLiteQuery): List<Measurement>
 

@@ -2,7 +2,6 @@ package com.aa.androidormcomparison.DBFlow;
 
 import android.content.Context;
 
-import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
@@ -65,21 +64,21 @@ public class DBFlowMeasurer implements Measurer {
         measurementTool.start();
         for (DBFlowEntity dBFlowEntity : dBFlowMinEntities)
             adapter.insert(dBFlowEntity, dbFlowDatabase);
-        measurementTool.stop(ORM.DBFLOW, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.DBFLOW, TestedAction.CREATE, numberOfEntities);
     }
 
     private void measureUpdate() {
         measurementTool.start();
         for (DBFlowEntity dBFlowEntity : dBFlowMaxEntities)
             adapter.update(dBFlowEntity, dbFlowDatabase);
-        measurementTool.stop(ORM.DBFLOW, TestedAction.UPDATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.DBFLOW, TestedAction.UPDATE, numberOfEntities);
     }
 
     private void measureDelete() {
         measurementTool.start();
         for (DBFlowEntity DBFlowEntity : dBFlowMaxEntities)
             adapter.delete(DBFlowEntity, dbFlowDatabase);
-        measurementTool.stop(ORM.DBFLOW, TestedAction.DELETE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.DBFLOW, TestedAction.DELETE, numberOfEntities);
     }
 
     private void measureRead() {
@@ -106,7 +105,7 @@ public class DBFlowMeasurer implements Measurer {
                 dBFlowEntity.getNullShort();
             }
         }
-        measurementTool.stop(ORM.DBFLOW, TestedAction.READ, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.DBFLOW, TestedAction.READ, numberOfEntities);
     }
 
     @Override
@@ -125,8 +124,6 @@ public class DBFlowMeasurer implements Measurer {
 
     @Override
     public void clean() {
-        dbFlowDatabase.reset();
-
         dbFlowDatabase.close();
     }
 

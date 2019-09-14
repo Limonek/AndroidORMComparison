@@ -1,13 +1,12 @@
 package com.aa.androidormcomparison.ORMLite;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
 import com.aa.androidormcomparison.measures.TestedAction;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
@@ -82,21 +81,21 @@ public class ORMLiteMeasurer implements Measurer {
         for (ORMLiteEntity oRMLiteEntity : oRMLiteMaxEntities) {
             dao.create(oRMLiteEntity);
         }
-        measurementTool.stop(ORM.ORMLITE, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ORMLITE, TestedAction.CREATE, numberOfEntities);
     }
 
     private void measureUpdate() throws SQLException {
         measurementTool.start();
         for (ORMLiteEntity oRMLiteEntity : oRMLiteMaxEntities)
             dao.update(oRMLiteEntity);
-        measurementTool.stop(ORM.ORMLITE, TestedAction.UPDATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ORMLITE, TestedAction.UPDATE, numberOfEntities);
     }
 
     private void measureDelete() throws SQLException {
         measurementTool.start();
         for (ORMLiteEntity greenDaoEntity : oRMLiteMaxEntities)
             dao.delete(greenDaoEntity);
-        measurementTool.stop(ORM.ORMLITE, TestedAction.DELETE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ORMLITE, TestedAction.DELETE, numberOfEntities);
     }
 
     private void measureRead() throws SQLException {
@@ -125,7 +124,7 @@ public class ORMLiteMeasurer implements Measurer {
                 oRMLiteEntity.getNullShort();
             }
         }
-        measurementTool.stop(ORM.ORMLITE, TestedAction.READ, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.ORMLITE, TestedAction.READ, numberOfEntities);
     }
 
     @Override
@@ -146,11 +145,13 @@ public class ORMLiteMeasurer implements Measurer {
     public void clean() {
 //        try {
         databaseHelper.close();
-        context.deleteDatabase("/data/data/com.aa.androidormcomparison/databases/ORMLiteDatabase.db");
+        Log.e("ORMLiteMeasurer", "clean after " + numberOfEntities);
+//        context.deleteDatabase("/data/data/com.aa.androidormcomparison/databases/ORMLiteDatabase.db");
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        OpenHelperManager.releaseHelper();
+//        databaseHelper.
+//        OpenHelperManager.releaseHelper();
         databaseHelper = null;
     }
 }

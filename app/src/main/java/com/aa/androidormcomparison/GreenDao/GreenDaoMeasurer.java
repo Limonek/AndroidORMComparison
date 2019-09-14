@@ -2,10 +2,7 @@ package com.aa.androidormcomparison.GreenDao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.aa.androidormcomparison.measures.ActionType;
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
 import com.aa.androidormcomparison.measures.ORM;
@@ -34,7 +31,6 @@ public class GreenDaoMeasurer implements Measurer {
     public GreenDaoMeasurer(Context context) {
         this.context = context;
     }
-
 
     @Override
     public void init() {
@@ -69,23 +65,22 @@ public class GreenDaoMeasurer implements Measurer {
         measurementTool.start();
         for (GreenDaoEntity greenDaoEntity : greenDaoMinEntities) {
             greenDaoEntityDao.insert(greenDaoEntity);
-//            Log.e("",)
         }
-        measurementTool.stop(ORM.GREENDAO, TestedAction.CREATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.GREENDAO, TestedAction.CREATE,  numberOfEntities);
     }
 
     private void measureUpdate() {
         measurementTool.start();
         for (GreenDaoEntity greenDaoEntity : greenDaoMaxEntities)
             greenDaoEntityDao.update(greenDaoEntity);
-        measurementTool.stop(ORM.GREENDAO, TestedAction.UPDATE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.GREENDAO, TestedAction.UPDATE,  numberOfEntities);
     }
 
     private void measureDelete() {
         measurementTool.start();
         for (GreenDaoEntity greenDaoEntity : greenDaoMaxEntities)
             greenDaoEntityDao.delete(greenDaoEntity);
-        measurementTool.stop(ORM.GREENDAO, TestedAction.DELETE, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.GREENDAO, TestedAction.DELETE,  numberOfEntities);
     }
 
     private void measureRead() {
@@ -112,7 +107,7 @@ public class GreenDaoMeasurer implements Measurer {
                 greenDaoEntity.getNullShort();
             }
         }
-        measurementTool.stop(ORM.GREENDAO, TestedAction.READ, ActionType.SINGLE_ENTITY, numberOfEntities);
+        measurementTool.stop(ORM.GREENDAO, TestedAction.READ,  numberOfEntities);
     }
 
     @Override

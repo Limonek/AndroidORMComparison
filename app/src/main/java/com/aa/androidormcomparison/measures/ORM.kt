@@ -1,5 +1,5 @@
 package com.aa.androidormcomparison.measures
 
 enum class ORM {
-    GREENDAO, DBFLOW, JDBC, ORMLITE, ROOM
+    GREENDAO, DBFLOW, ORMLITE, ROOM
 }

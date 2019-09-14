@@ -18,6 +18,7 @@ public class GreenDaoEntityFactory {
                 Float.MAX_VALUE,
                 Double.MAX_VALUE);
     }
+
     public static GreenDaoEntity createMinGreenDaoEntity(Long id) {
         return new GreenDaoEntity(id,
                 null,
