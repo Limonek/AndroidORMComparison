@@ -3,12 +3,17 @@ package com.aa.androidormcomparison;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.aa.androidormcomparison.DBFlow.DBFlowMeasurer;
 import com.aa.androidormcomparison.GreenDao.GreenDaoMeasurer;
 import com.aa.androidormcomparison.ORMLite.ORMLiteMeasurer;
 import com.aa.androidormcomparison.Room.RoomMeasurer;
+import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementDao;
+import com.aa.androidormcomparison.measures.MeasureDatabase.MeasurementsDatabase;
 import com.aa.androidormcomparison.measures.MeasuresConductor;
+
+import java.util.concurrent.Executors;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

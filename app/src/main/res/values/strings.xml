@@ -4,5 +4,6 @@
     <string name="Room">Room</string>
     <string name="DBFlow">DBFlow</string>
     <string name="ORMLite">ORMLite</string>
+    <string name="RunMeasurementDao">Run measurement DAO</string>
     <string name="JDBC">JDBC</string>
 </resources>

@@ -2,6 +2,7 @@ package com.aa.androidormcomparison.GreenDao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
@@ -128,6 +129,7 @@ public class GreenDaoMeasurer implements Measurer {
     public void clean() {
         daoSession.getGreenDaoEntityDao().deleteAll();
         helper.close();
+        Log.e("GreenDaoMeasurer", "clean after " + numberOfEntities);
     }
 
     public void setNumberOfEntities(int numberOfEntities) {

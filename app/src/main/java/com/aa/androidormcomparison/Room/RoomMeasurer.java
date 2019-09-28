@@ -1,6 +1,7 @@
 package com.aa.androidormcomparison.Room;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -118,6 +119,7 @@ public class RoomMeasurer implements Measurer {
     @Override
     public void clean() {
         roomEntityDao.deleteAll();
+        Log.e("Room", "clean after " + numberOfEntities);
     }
 
     public void setNumberOfEntities(int numberOfEntities) {

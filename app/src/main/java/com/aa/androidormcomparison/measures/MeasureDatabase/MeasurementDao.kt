@@ -20,6 +20,10 @@ interface MeasurementDao {
     @Query("delete from measurement where ormName = :ormName")
     fun deleteOrmMeasurements(ormName: String)
 
+    @Query("delete from measurement where duration=:duration and testedActionName=:testedActionName and ormName =:ormName and numberOfRecords=:numberOfRecords")
+    fun deleteOrmMeasurements(duration: Long, testedActionName: String,
+                              ormName: String, numberOfRecords: Int)
+
     @Query("delete from measurement where numberOfRecords < :minNumberOfRecords")
     fun deleteOrmMeasurements(minNumberOfRecords: Int)
 

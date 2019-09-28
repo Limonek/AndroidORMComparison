@@ -1,6 +1,7 @@
 package com.aa.androidormcomparison.DBFlow;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.aa.androidormcomparison.measures.MeasurementTool;
 import com.aa.androidormcomparison.measures.Measurer;
@@ -125,6 +126,7 @@ public class DBFlowMeasurer implements Measurer {
     @Override
     public void clean() {
         dbFlowDatabase.close();
+        Log.e("DBFlowMeasurer", "clean after " + numberOfEntities);
     }
 
     public void setNumberOfEntities(int numberOfEntities) {
